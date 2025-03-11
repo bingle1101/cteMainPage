@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable, TextInput, StyleSheet } from 'react-native'
+import { View, Text, Image, Pressable, TextInput, StyleSheet, useWindowDimensions } from 'react-native'
 import { Link } from 'expo-router'
 import { useFonts, Oswald_300Light, Oswald_600SemiBold, Oswald_500Medium } from '@expo-google-fonts/oswald'
 import Colors from './colors'
@@ -6,10 +6,57 @@ import { Dropdown } from 'react-native-element-dropdown'
 import { useState } from 'react'
 import { router } from 'expo-router'
 export default function topBar() {
+  const { width, height } = useWindowDimensions()
   useFonts({
     'oswaldlight': Oswald_300Light,
     'oswaldmedium': Oswald_500Medium,
     'oswaldsemibold': Oswald_600SemiBold
+  })
+
+  const styles = StyleSheet.create({
+    topBar: {
+      padding: width * 0.010,
+      alignItems: 'center',
+      backgroundColor: Colors.secondary,
+      flexDirection: 'row'
+    },
+    topImageStyle: {
+      marginLeft: width * 0.005,
+      height: width * 0.05,
+      width: width * 0.05
+    },
+    titleStyle: {
+      color: Colors.primary,
+      fontWeight: 'bold',
+      fontSize: width * 0.03,
+      marginLeft: width * 0.01,
+      marginRight: width * 0.1,
+      fontFamily: 'oswaldsemibold'
+    },
+    topButtonStyle: {
+      color: Colors.primary,
+      fontSize: width * 0.0175,
+      marginRight: width * 0.02,
+      fontFamily: 'oswaldmedium'
+    },
+    searchContainer: {
+      borderWidth: 1,
+      borderColor: Colors.primary,
+      alignItems: 'center',
+      flexDirection: 'row'
+    },
+    searchStyle: {
+      color: Colors.primary,
+      fontSize: width * 0.0175,
+      fontFamily: 'oswaldmedium',
+      opacity: 0.5,
+      marginLeft: width * 0.01
+    },
+    placeholder: {
+      color: Colors.primary,
+      fontSize: width * 0.0175,
+      marginLeft: width * 0.01
+    }
   })
 
   const [value, setValue] = useState();
@@ -67,50 +114,3 @@ export default function topBar() {
       </View>
     </View>
   )
-}
-
-export const styles = StyleSheet.create({
-  topBar: {
-    padding: 10,
-    alignItems: 'center',
-    backgroundColor: Colors.secondary,
-    flexDirection: 'row',
-  },
-  topImageStyle: {
-    marginLeft: 15,
-    height: 75,
-    width: 75
-  },
-  titleStyle: {
-    color: Colors.primary,
-    fontWeight: 'bold',
-    fontSize: 40,
-    marginLeft: 15,
-    marginRight: 250,
-    fontFamily: 'oswaldsemibold'
-  },
-  topButtonStyle: {
-    color: Colors.primary,
-    fontSize: 25,
-    marginRight: 25,
-    fontFamily: 'oswaldmedium'
-  },
-  searchContainer: {
-    borderWidth: 1,
-    borderColor: Colors.primary,
-    alignItems: 'center',
-    flexDirection: 'row'
-  },
-  searchStyle: {
-    color: Colors.primary,
-    fontSize: 25,
-    fontFamily: 'oswaldmedium',
-    opacity: 0.5,
-    marginLeft: 10
-  },
-  placeholder: {
-    color: Colors.primary,
-    fontSize: 25,
-    marginLeft: 10
-  }
-})
